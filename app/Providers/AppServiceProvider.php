@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
             'isAuthenticated' => fn () => Auth::check(), // Проверка авторизации
             'user' => fn () => Auth::check() ?  ['id' => Auth::user()->id, 'name' => Auth::user()->first_name, 'email' => Auth::user()->email] : null
         ]);
+        if (env('APP_ENV') !== 'local') {
+            URL::forceScheme('https');
+        }
     }
 }

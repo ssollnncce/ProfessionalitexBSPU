@@ -17,4 +17,10 @@ export default defineConfig({
             },
         }),
     ],
+    server: {
+        https: true,
+        proxy: {
+            '/': 'https://professionalitexbspu-professionalitet2.up.railway.app/',
+        }
+    }    
 });
